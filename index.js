@@ -86,15 +86,15 @@ app.post('/api/price_plan/update', async function (req, res) {
 });
 
 app.get('/api/price_plan/delete', async function (req, res) {
-    const pricePlanId = parseInt(req.query.id);
+    const pricePlan = req.query.plan_name;
 
-    if (!pricePlanId) {
+    if (!pricePlan) {
         res.json({
-            error: "price_plan id not found!"
+            error: "price_plan name not found!"
         })
     }
 
-    await deletePricePlan(pricePlanId);
+    await deletePricePlan(pricePlan);
 
     res.json(
         {

@@ -29,12 +29,12 @@ export async function updatePricePlan(pricePlanName, smsCost, callCost) {
     }
 }
 
-export async function deletePricePlan(id) {
+export async function deletePricePlan(price_plan) {
 
-    console.log(id)
+    console.log(price_plan)
     try {
-        const sql = 'delete from price_plan where id = ?';
-        await db.run(sql, [id]);
+        const sql = 'delete from price_plan where plan_name = ?';
+        await db.run(sql, [price_plan]);
 
     } catch (error) {
         console.log(error)

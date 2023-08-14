@@ -93,16 +93,16 @@
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-body">
-                    <form x-on:submit.prevent="selectedId">
+                    <form x-on:submit.prevent="selectedDb">
                         <h3>Delete an existing price plan</h3>
                         <br>
-                        <label for="name">Plan Id:</label><br>
-                        <input x-model="selectedId" type="number" name="id"><br>
+                        <label for="name">Plan Name:</label><br>
+                        <input x-model="selectedDb" type="text" name="name"><br>
                         <hr>
                     </form>
 
                     <br>
-                    <button x-on:click="deletePricePlan(selectedId)">delete</button>
+                    <button x-on:click="deletePricePlan">delete</button>
 
                 </div>
             </div>

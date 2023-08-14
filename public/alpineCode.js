@@ -10,7 +10,7 @@ function AlpineMainFunction() {
         nameUpdate: "",
         call_priceUpdate: 0.0,
         sms_priceUpdate: 0.0,
-        selectedId: 0,
+        selectedDb: "",
 
         allPricePlans() {
             this.open = true;
@@ -48,7 +48,7 @@ function AlpineMainFunction() {
 
         deletePricePlan() {
             axios
-                .get(`http://localhost:4011/api/price_plan/delete?id=${this.selectedId}`)
+                .get(`http://localhost:4011/api/price_plan/delete?plan_name=${this.selectedDb}`)
                 .then((result) => {
                     this.response = result.data;
                 })

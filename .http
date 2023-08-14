@@ -1,0 +1,16 @@
+POST http://localhost:4011/api/price_plan/update
+content-type: application/json
+
+{
+    "plan_name" : "regular Package",
+    "sms_price" : 6,
+    "call_price" : 6
+}
+
+### 
+
+GET http://localhost:4011/api/price_plan
+
+### 
+
+GET http://localhost:4011/api/price_plan/delete?plan_name=Premium Package
