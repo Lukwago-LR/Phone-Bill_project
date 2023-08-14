@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>API Widgets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+        integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body x-cloak x-data="mainFunction">
+    <h2 class="header">TOTAL PHONE BILL PRICE PLANS WITH SQLITE</h2>
+
+    <div class="row content">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+
+                    <h3>Available Price Plans</h3>
+                    <br>
+                    <button x-on:click="allPricePlans">Get Price Plans</button>
+
+                </div>
+            </div>
+            <div x-show="open">
+                <template x-for="plan in pricePlans">
+
+                    <div>
+                        <h4>Plan Name: <label x-text="plan.plan_name"></label></h4>
+                        <h4>Sms_Price: R<label x-text="plan.sms_price"></label></h4>
+                        <h4>Call_Price: R<label x-text="plan.call_price"></label></h4>
+                        <hr>
+                    </div>
+
+                </template>
+
+                <button x-on:click="open=!open">Open/Close Price Plans</button>
+
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="name, call_price, sms_price">
+                        <h3>Add a new price plan</h3>
+                        <br>
+                        <label for="name">Plan Name:</label><br>
+                        <input x-model="name" type="text" id="name" name="name"><br>
+                        <label for="callprice">Call Price:</label><br>
+                        <input x-model="call_price" type="number" id="callprice" name="call price"><br>
+                        <label for="smsprice">Sms Price:</label><br>
+                        <input x-model="sms_price" type="number" id="smsprice" name="sms price"> <br>
+                        <hr>
+                        <button x-on:click="addPricePlan">Add a new price plan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="nameUpdate, call_priceUpdate, sms_priceUpdate">
+                        <h3>Update an existing price plan</h3>
+                        <br>
+                        <label>Plan Name:</label><br>
+                        <input x-model="nameUpdate" type="text" id="nameUpdate" name="name"><br>
+                        <label for="callprice">Call Price:</label><br>
+                        <input x-model="call_priceUpdate" type="number" id="callpriceUpdate" name="call price"><br>
+                        <label for="smsprice">Sms Price:</label><br>
+                        <input x-model="sms_priceUpdate" type="number" id="smspriceUpdate" name="sms price"> <br>
+                        <hr>
+                        <button x-on:click="updatePricePlan">Update the price plan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="selectedId">
+                        <h3>Delete an existing price plan</h3>
+                        <br>
+                        <label for="name">Plan Id:</label><br>
+                        <input x-model="selectedId" type="number" name="id"><br>
+                        <hr>
+                    </form>
+
+                    <br>
+                    <button x-on:click="deletePricePlan(selectedId)">delete</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row content">
+        <img src="phoneBills.png" width="20%" alt="phone bills">
+    </div>
+    <script src="alpineCode.js" async defer></script>
+</body>
+
+</html>
