@@ -14,6 +14,27 @@ export async function getAllPlans() {
     return result;
 }
 
+export async function totalPhoneBill(plan_name, actions) {
+    const sql = 'select sms_price, call_price from price_plan where plan_name = ?';
+    const result = await db.all(sql, [plan_name]);
+   
+
+    let l = actions.split(",");
+    var cost = 0;
+    const callCost = result[0].call_price;
+    const smsCost = result[0].sms_price;
+    
+    for (var name of l) {
+      if (name.includes("call")) {
+        cost += callCost;
+      } else {
+        cost += smsCost;
+      }
+    }
+
+     return cost.toFixed(2);
+}
+
 export async function addPricePlan(pricePlanName, smsCost, callCost) {
     const sql = 'insert into price_plan (plan_name, sms_price, call_price) VALUES (?,?,?)'
     await db.run(sql, [pricePlanName, smsCost, callCost])

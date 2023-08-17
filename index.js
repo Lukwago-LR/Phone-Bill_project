@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import { getAllPlans, addPricePlan, updatePricePlan, deletePricePlan } from './bootcamp/PhoneBillFunctions.js';
+import { getAllPlans, addPricePlan, updatePricePlan, deletePricePlan, totalPhoneBill } from './bootcamp/PhoneBillFunctions.js';
 
 const app = express()
 
@@ -25,8 +25,8 @@ app.get("/api/price_plan", async function (req, res) {
     );
 });
 
-app.post('/api/phonebill/', async function (req, res) {
-    const pricePlanName = req.body.price_plan;
+app.post('/api/price_plan/phonebill', async function (req, res) {
+    const pricePlanName = req.body.plan_name;
     const actionsString = req.body.actions;
 
     if (!pricePlanName && !actionsString) {

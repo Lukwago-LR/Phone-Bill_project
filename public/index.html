@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
         integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -100,10 +100,8 @@
                         <input x-model="selectedDb" type="text" name="name"><br>
                         <hr>
                     </form>
-
                     <br>
                     <button x-on:click="deletePricePlan">delete</button>
-
                 </div>
             </div>
         </div>
@@ -111,7 +109,35 @@
     </div>
 
     <div class="row content">
-        <img src="phoneBills.png" width="20%" alt="phone bills">
+        <div class="col-sm-4">
+            <img src="phoneBills.png" width="100%" alt="phone bills">
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <form x-on:submit.prevent="selectedName, actions">
+                        <h3>Total Package Price</h3>
+                        <br>
+                        <label for="name">Plan Name:</label><br>
+                        <input x-model="selectedName" type="text" id="selectedName" name="selectedName"><br>
+
+                        <label for="actions">Actions:</label><br>
+                        <input x-model="actions" type="text" id="actions"  name="actions"><br>
+                        <hr>
+                        <button x-on:click="phoneBill">Get price</button>
+                    </form>
+
+                    <div>
+                        <h3 class="text-primary">R<label x-text="total"></label></h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <img src="phoneBills.png" width="100%" alt="phone bills">
+        </div>
+
     </div>
     <script src="alpineCode.js" async defer></script>
 </body>

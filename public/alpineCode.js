@@ -11,20 +11,33 @@ function AlpineMainFunction() {
         call_priceUpdate: 0.0,
         sms_priceUpdate: 0.0,
         selectedDb: "",
+        total: 0,
+        actions: "",
+        selectedName: "",
+
+        phoneBill() {
+            axios
+                .post('/api/price_plan/phonebill', {
+                    plan_name: this.selectedName,
+                    actions: this.actions
+                })
+                .then((result) => {
+                    this.total = result.data.total;
+                })
+        },
 
         allPricePlans() {
             this.open = true;
             axios
-                .get('http://localhost:4011/api/price_plan')
+                .get('/api/price_plan')
                 .then((result) => {
                     this.pricePlans = result.data.price_plans
-                    console.log(result)
                 })
         },
 
         addPricePlan() {
             axios
-                .post('http://localhost:4011/api/price_plan/create', {
+                .post('/api/price_plan/create', {
                     plan_name: this.name,
                     call_price: this.call_price,
                     sms_price: this.sms_price
@@ -36,7 +49,7 @@ function AlpineMainFunction() {
 
         updatePricePlan() {
             axios
-                .post('http://localhost:4011/api/price_plan/update', {
+                .post('/api/price_plan/update', {
                     plan_name: this.nameUpdate,
                     call_price: this.call_priceUpdate,
                     sms_price: this.sms_priceUpdate
@@ -48,7 +61,7 @@ function AlpineMainFunction() {
 
         deletePricePlan() {
             axios
-                .get(`http://localhost:4011/api/price_plan/delete?plan_name=${this.selectedDb}`)
+                .get(`/api/price_plan/delete?plan_name=${this.selectedDb}`)
                 .then((result) => {
                     this.response = result.data;
                 })
